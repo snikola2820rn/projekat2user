@@ -3,41 +3,25 @@ package com.rafrn2820.project2.UserService.dto;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.Length;
 
-public class DiscountDto {
+public class DiscountCreateDto {
     @NotNull
-    private Long id;
     @Min(value = 0)
     private Long discount;
-    @Length(min = 1)
+    @NotNull
     private String title;
+    @NotNull
     @Min(value = 0)
     private Long minTime;
-    @Min(value = 0)
+    @NotNull
     private Long maxTime;
+
+
+    public DiscountCreateDto() {
+    }
+
     public Long getDiscount() {
         return discount;
-    }
-
-    public DiscountDto() {
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public Long getMaxTime() {
@@ -48,6 +32,14 @@ public class DiscountDto {
         this.maxTime = maxTime;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public Long getMinTime() {
         return minTime;
     }
@@ -56,7 +48,7 @@ public class DiscountDto {
         this.minTime = minTime;
     }
 
-    public DiscountDto(Long discount) {
+    public DiscountCreateDto(Long discount) {
         this.discount = discount;
     }
 

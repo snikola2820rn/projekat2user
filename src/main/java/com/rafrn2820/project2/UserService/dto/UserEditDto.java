@@ -10,7 +10,7 @@ public class UserEditDto {
     private String email;
     @Length(min = 1)
     private String username;
-    @Length(min = 1,max = 20)
+    @Length(min = 2,max = 20)
     private String password;
     @Length(min = 1)
     private String firstName;

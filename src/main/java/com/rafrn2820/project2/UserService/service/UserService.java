@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface UserService {
 
-    Page<UserDto> findAll(Pageable pageable);
+    Page<UserDto> findAllUsers(Pageable pageable);
     DiscountDto findDiscount(Long id);
 
     UserDto addClient(ClientCreateDto clientCreateDto);
@@ -21,6 +21,13 @@ public interface UserService {
 
     UserDto findUser(Long id);
 
-    UserDto banUser(Long id);
+    UserDto toggleBan(Long id);
 
+    DiscountDto addDiscount(DiscountCreateDto discountDto);
+
+    DiscountDto editDiscount(DiscountDto discountDto);
+
+    UserDto removeUser(Long id);
+
+    DiscountDto removeDiscount(Long id);
 }

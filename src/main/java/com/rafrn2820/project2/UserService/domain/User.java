@@ -1,14 +1,16 @@
 package com.rafrn2820.project2.UserService.domain;
 
 import jakarta.persistence.*;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.time.LocalDate;
 
-//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "role",discriminatorType = DiscriminatorType.STRING)
+@Table(indexes = {@Index(columnList = "username", unique = true), @Index(columnList = "email", unique = true)})
 public class User {
     @Id
-    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
@@ -17,9 +19,11 @@ public class User {
     private String username;
     private String password;
     private String phone;
+    @Column(name="role", insertable = false, updatable = false)
     private String role;
     private LocalDate birthdate;
-    private Boolean banned;
+//    @Column(columnDefinition = "boolean default false")
+    private boolean banned = false;
     public LocalDate getBirthdate() {
         return birthdate;
     }
@@ -48,9 +52,9 @@ public class User {
         return role;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+//    public void setRole(String role) {
+//        this.role = role;
+//    }
 
     public Long getId() {
         return id;
@@ -58,6 +62,10 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getEmail() {
@@ -98,5 +106,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getBanned() {
+        return banned;
+    }
+
+    public void setBanned(Boolean banned) {
+        this.banned = banned;
     }
 }

@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 
 public class UserCreateDto {
-    @Email(regexp = "[a-zA-Z0-9]+@([a-zA-Z].)+(com|rs)")
+    @Email(regexp = "[a-zA-Z0-9]+@([a-zA-Z]+.)+(com|rs)")
     private String email;
     @NotBlank
     private String firstName;
@@ -15,13 +15,13 @@ public class UserCreateDto {
     @NotBlank
     private String username;
     @NotBlank
-    @Length(min = 8, max = 20)
+    @Length(min = 2, max = 20)
     private String password;
+//    @NotBlank
+//    @Pattern(regexp = "ROLE_ADMIN|ROLE_CLIENT|ROLE_MANAGER")
+//    private String role;
     @NotBlank
-    @Pattern(regexp = "ROLE_ADMIN|ROLE_CLIENT|ROLE_MANAGER")
-    private String role;
-    @NotBlank
-    @Pattern(regexp = "^(?:0[1-9]|[12]\\d|3[01])([\\/.-])(?:0[1-9]|1[012])\\1(?:19|20)\\d\\d$")
+//    @Pattern(regexp = "^(?:0[1-9]|[12]\\d|3[01])([\\/.-])(?:0[1-9]|1[012])\\1(?:19|20)\\d\\d$")
     private String birthdate;
 
     @NotBlank
@@ -76,13 +76,13 @@ public class UserCreateDto {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
+//    public String getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(String role) {
+//        this.role = role;
+//    }
 
     public String getBirthdate() {
         return birthdate;

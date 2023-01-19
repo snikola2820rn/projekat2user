@@ -1,17 +1,12 @@
 package com.rafrn2820.project2.UserService.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Index;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(indexes = {@Index(columnList = "username", unique = true), @Index(columnList = "email", unique = true)})
+@DiscriminatorValue("ROLE_CLIENT")
 public class Client extends User{
 
-    @Column(name = "passport_no")
     private String passport;
-    @Column(name = "total_reservation_days")
     private Long time;
 
     public String getPassport() {

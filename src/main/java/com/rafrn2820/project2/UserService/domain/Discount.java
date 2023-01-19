@@ -10,13 +10,27 @@ public class Discount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer minTime;
-    private Integer discount;
+    private Long minTime;
 
-    public Discount(Long id, Integer minTime, Integer maxTime, Integer discount) {
-        this.id = id;
-        this.minTime = minTime;
-        this.discount = discount;
+    private Long maxTime;
+    private Long discount;
+
+    private String title;
+
+    public Long getMaxTime() {
+        return maxTime;
+    }
+
+    public void setMaxTime(Long maxTime) {
+        this.maxTime = maxTime;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Long getId() {
@@ -27,19 +41,19 @@ public class Discount {
         this.id = id;
     }
 
-    public Integer getMinTime() {
+    public Long getMinTime() {
         return minTime;
     }
 
-    public void setMinTime(Integer minTime) {
+    public void setMinTime(Long minTime) {
         this.minTime = minTime;
     }
 
-    public Integer getDiscount() {
+    public Long getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Integer discount) {
+    public void setDiscount(Long discount) {
         this.discount = discount;
     }
 }

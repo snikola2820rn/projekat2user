@@ -24,32 +24,32 @@ public class UserController {
     @CheckSecurity(roles = {"ROLE_ADMIN"})
     public ResponseEntity<Page<UserDto>> getAllUsers(@RequestHeader("Authorization") String authorization,
                                                      Pageable pageable) {
-        return new ResponseEntity<>(userService.findAll(pageable), HttpStatus.OK);
+        return new ResponseEntity<>(userService.findAllUsers(pageable), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     @CheckSecurity(roles = {"ROLE_ADMIN"})
-    public ResponseEntity<UserDto> getUser(@PathVariable("id") Long id) {
+    public ResponseEntity<UserDto> getUser(@RequestHeader("Authorization") String authorization,@PathVariable("id") Long id) {
         return new ResponseEntity<>(userService.findUser(id), HttpStatus.OK);
     }
 
     @GetMapping("/{id}/discount")
     @CheckSecurity(roles = {"ROLE_ADMIN"})
-    public ResponseEntity<DiscountDto> getDiscount(@PathVariable("id") Long id) {
+    public ResponseEntity<DiscountDto> getDiscount(@RequestHeader("Authorization") String authorization,@PathVariable("id") Long id) {
         return new ResponseEntity<>(userService.findDiscount(id), HttpStatus.OK);
     }
 
     @PostMapping("/edit/client")
-    @CheckSecurity(roles = {"ROLE_CLIENT"})
+    @CheckSecurity(roles = {"ROLE_ADMIN","ROLE_CLIENT"})
     @CheckId
-    public ResponseEntity<UserDto> editClient(@RequestBody @Valid ClientEditDto clientEditDto) {
+    public ResponseEntity<UserDto> editClient(@RequestHeader("Authorization") String authorization,@RequestBody @Valid ClientEditDto clientEditDto) {
         return new ResponseEntity<>(userService.updateClient(clientEditDto), HttpStatus.OK);
     }
 
     @PostMapping("/edit/manager")
-    @CheckSecurity(roles = {"ROLE_MANAGER"})
+    @CheckSecurity(roles = {"ROLE_ADMIN","ROLE_MANAGER"})
     @CheckId
-    public ResponseEntity<UserDto> editManager(@RequestBody @Valid ManagerEditDto managerEditDto) {
+    public ResponseEntity<UserDto> editManager(@RequestHeader("Authorization") String authorization,@RequestBody @Valid ManagerEditDto managerEditDto) {
         return new ResponseEntity<>(userService.updateManager(managerEditDto), HttpStatus.OK);
     }
 
@@ -67,4 +67,12 @@ public class UserController {
     public ResponseEntity<UserDto> saveManager(@RequestBody @Valid ManagerCreateDto managerCreateDto) {
         return new ResponseEntity<>(userService.addManager(managerCreateDto), HttpStatus.CREATED);
     }
+
+    @PostMapping("/{id}/ban")
+    @CheckSecurity(roles = {"ROLE_ADMIN"})
+    public ResponseEntity<UserDto> banUser(@RequestHeader("Authorization") String authorization,@PathVariable("id") Long id) {
+        return new ResponseEntity<>(userService.toggleBan(id), HttpStatus.OK);
+    }
+
+
 }

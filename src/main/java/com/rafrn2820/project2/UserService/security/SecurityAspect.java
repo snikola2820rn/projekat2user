@@ -99,6 +99,9 @@ public class SecurityAspect {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
+        if(claims.get("role",String.class).equals("ROLE_ADMIN"))
+            return joinPoint.proceed();
+
         Long tokenId = claims.get("id",Long.class);
 
         if(id == tokenId) {
